@@ -5,12 +5,23 @@ const App = () => {
   const [courses, setCourses] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
 
+  // useEffect(() => {
+  //   // Fetching courses data from an API endpoint (replace with your actual endpoint)
+  //   fetch('/courses')
+  //     .then((response) => response.json())
+  //     .then((data) => setCourses(data))
+  //     .catch((error) => console.error('Error fetching courses:', error));
+  // }, []);
+
   useEffect(() => {
-    // Fetching courses data from an API endpoint (replace with your actual endpoint)
-    fetch('/courses')
-      .then((response) => response.json())
-      .then((data) => setCourses(data))
-      .catch((error) => console.error('Error fetching courses:', error));
+    // Dummy data for now
+    const dummyCourses = [
+      { id: 1, name: 'Cloud Computing', date: '2024-12-01' },
+      { id: 2, name: 'Data Science 101', date: '2024-11-15' },
+      { id: 3, name: 'Web Development Basics', date: '2024-10-25' },
+      { id: 4, name: 'Machine Learning Fundamentals', date: '2024-09-30' },
+    ];
+    setCourses(dummyCourses);
   }, []);
 
   const filteredCourses = courses.filter((course) =>
