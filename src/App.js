@@ -27,7 +27,7 @@ const App = () => {
       <div className="app">
         <header>
           <nav className="navbar">
-            <div className="navbar-brand">CourseWorks</div>
+            <div className="navbar-brand">Laundry List</div>
             <ul className="navbar-links">
               <li><Link to="/">Home</Link></li>
               <li><Link to="/courses">Courses</Link></li>
@@ -124,10 +124,12 @@ const AssignmentDetails = () => {
     <div>
       {assignment ? (
         <div>
-          <h2>Assignment Details for {courseName}</h2>
+          <h2>Assignment Details</h2>
+          <br></br>
+          <p><strong>Course Name:</strong> {courseName}</p>
+          <p><strong>Date Created:</strong> {assignment.dateCreated}</p>
           <p><strong>Due Date:</strong> {assignment.dueDate}</p>
           <p><strong>Is Quiz:</strong> {assignment.isQuiz}</p>
-          <p><strong>Date Created:</strong> {assignment.dateCreated}</p>
         </div>
       ) : (
         <p>Loading...</p>
