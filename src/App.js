@@ -3,10 +3,10 @@ import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import './App.css';
 import About from './components/About';
 import AssignmentDetails from './components/Assignments';
-import CourseTable from './components/courses';
-import Error from './components/error';
-import Home from './components/home';
-import Login from './components/login';
+import CourseTable from './components/Courses';
+import Error from './components/Error';
+import Home from './components/Home';
+import Login from './components/Login';
 
 const App = () => {
   const [courses, setCourses] = useState([]);
