@@ -9,7 +9,7 @@ const Login = ({ setUserToken }) => {
 
     return (
         <>
-            <h1>Login Form will be here</h1>
+            <h1>Login to access your Laundry List!</h1>
             <Link to="/" onClick={() => handleLoginClick()}>Login</Link>
         </>
     );

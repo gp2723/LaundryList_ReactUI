@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import './App.css';
-import About from './components/about';
-import AssignmentDetails from './components/assignments';
+import About from './components/About';
+import AssignmentDetails from './components/Assignments';
 import CourseTable from './components/courses';
 import Error from './components/error';
 import Home from './components/home';
