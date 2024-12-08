@@ -11,7 +11,7 @@ const Login = ({ setUserToken }) => {
 
     return (
         <>
-            <h1>Login to access your Laundry List!</h1>
+            <h1>Login to access your HWLaundryList!</h1>
             <Form>
             <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Label>Email address</Form.Label>

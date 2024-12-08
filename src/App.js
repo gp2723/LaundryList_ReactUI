@@ -35,7 +35,7 @@ const App = () => {
       <div className="app">
         <header>
           <nav className="navbar">
-            <div className="navbar-brand">Laundry List</div>
+            <div className="navbar-brand">HWLaundryList</div>
             <ul className="navbar-links">
               { userToken ? 
               <>
