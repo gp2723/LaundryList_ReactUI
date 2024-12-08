@@ -46,7 +46,6 @@ const App = () => {
               </>
               : 
               <>
-                <li><Link to="/login">Login</Link></li>
               </>
               }
             </ul>
@@ -55,7 +54,7 @@ const App = () => {
 
         <main>
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={<Home isUserAuthenticated={userToken} />} />
             <Route path="/login" element={<Login setUserToken={setUserToken} />} />
             <Route path="/courses" element={<CourseTable courses={filteredCourses} searchTerm={searchTerm} setSearchTerm={setSearchTerm} />} />
             <Route path="/about" element={<About />} />
