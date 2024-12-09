@@ -10,25 +10,8 @@ import Home from './components/Home';
 import Login from './components/Login';
 
 const App = () => {
-  const [courses, setCourses] = useState([]);
-  const [searchTerm, setSearchTerm] = useState('');
 
   const [userToken, setUserToken] = useState(null);
-
-  useEffect(() => {
-    // Dummy data for courses
-    const dummyCourses = [
-      { id: 1, name: 'Cloud Computing', date: '2024-12-01' },
-      { id: 2, name: 'Data Science 101', date: '2024-11-15' },
-      { id: 3, name: 'Web Development Basics', date: '2024-10-25' },
-      { id: 4, name: 'Machine Learning Fundamentals', date: '2024-09-30' },
-    ];
-    setCourses(dummyCourses);
-  }, []);
-
-  const filteredCourses = courses.filter((course) =>
-    course.name.toLowerCase().includes(searchTerm.toLowerCase())
-  );
 
   return (
     <Router>
@@ -45,8 +28,7 @@ const App = () => {
                 <li><Link to="/" onClick={() => setUserToken(null)}>Logout</Link></li>
               </>
               : 
-              <>
-              </>
+              <></>
               }
             </ul>
           </nav>
@@ -56,7 +38,7 @@ const App = () => {
           <Routes>
             <Route path="/" element={<Home isUserAuthenticated={userToken} />} />
             <Route path="/login" element={<Login setUserToken={setUserToken} />} />
-            <Route path="/courses" element={<CourseTable courses={filteredCourses} searchTerm={searchTerm} setSearchTerm={setSearchTerm} />} />
+            <Route path="/courses" element={<CourseTable />} />
             <Route path="/about" element={<About />} />
             <Route path="/courses/:courseId/assignments" element={<AssignmentDetails />} />
             <Route path="*" element={<Error />} />
