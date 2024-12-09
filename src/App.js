@@ -31,7 +31,11 @@ const App = () => {
       <div className="app">
         <header>
           <nav className="navbar">
-            <div className="navbar-brand">HWLaundryList</div>
+            <div className="navbar-brand">
+              <Link to="/"style={{ textDecoration: 'none', color: 'white', fontWeight: 'bold' }}>
+                HWLaundryList
+              </Link>
+            </div>
             <ul className="navbar-links">
               { userToken ? 
               <>
