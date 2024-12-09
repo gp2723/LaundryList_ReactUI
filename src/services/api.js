@@ -6,8 +6,7 @@ import axios from 'axios';
 // POST method to send user input, assigment title, and description
 export const postGenerateAIResponse = async (userInput, assignmentTitle, description) => {
     try {
-        const response = await
-         axios.post('http://44.202.47.119:8000/generate_AI_response', {
+        let response = await axios.post('http://44.202.47.119:8000/generate_AI_response', {
             user_message: userInput,
             assignment_title_description: assignmentTitle + '\n\n' + description
         });

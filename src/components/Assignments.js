@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
-import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
+import Modal from 'react-bootstrap/Modal';
+import Spinner from 'react-bootstrap/Spinner';
 
 import { postGenerateAIResponse } from '../services/api';
 
@@ -13,7 +14,7 @@ const AssignmentDetails = () => {
     const [courseName, setCourseName] = useState('');
 
     const [show, setShow] = useState(false);
-    const [userInput, setUserInput] = useState('');
+    const [processing, setProcessing] = useState(false);
     const [generatedAIResponse, setGeneratedAIResponse] = useState('');
 
     const handleClose = () => setShow(false);
@@ -49,14 +50,27 @@ const AssignmentDetails = () => {
 
     // Function to generate AI response
     const handleGenerateAIResponse = () => {
-        
-        // Wait for the AI response
-        const response = postGenerateAIResponse(userInput, assignment.title, assignment.description);
+      
+        // Get the user input from the form
+        const userInput = document.getElementById('form.userInput').value;
 
-        // Show the response
-        console.log('AI response generated');
-        console.log(response);
-        setGeneratedAIResponse(response);
+        // Show spinner
+        setProcessing(true);
+      
+        // Wait for the AI response
+        postGenerateAIResponse(userInput, assignment.title, assignment.description)
+          .then((response) => {
+  
+          // Set the user input to ''
+          document.getElementById('form.userInput').value = '';
+
+          // Hide spinner
+          setProcessing(false);
+          
+          // Show the response
+          setGeneratedAIResponse(response.response_to_student.response_to_student);
+        
+        });
     };
 
   
@@ -86,17 +100,34 @@ const AssignmentDetails = () => {
             </Modal.Header>
             <Modal.Body>
               <Form>
-                <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
+                <Form.Group className="mb-3" controlId="form.userInput">
                   <Form.Label>Get help from SurfAI to generate a response for this assignment.</Form.Label>
-                  <Form.Control as="textarea" rows={3} />
+                  <Form.Control as="textarea" rows={3} placeholder="Enter your question here..." />
                 </Form.Group>
               </Form>
-              <Button color="primary" onClick={handleGenerateAIResponse} >
-                Ask
-              </Button>
+              {
+                processing ? (
+                  <Spinner animation="grow" />
+                ) : (
+                  <Button color="primary" onClick={handleGenerateAIResponse} >
+                    Ask
+                  </Button>
+                )
+              }
               <br />
               <br />
-              <p>AI response will be displayed here...</p>
+              {
+                generatedAIResponse ? (
+                  <>
+                    <p>
+                      AI Response:
+                    </p>
+                    <p>
+                      {generatedAIResponse}
+                    </p>
+                  </>
+                ) : null
+              }
             </Modal.Body> 
             <Modal.Footer>
               <Button variant="secondary" onClick={handleClose}>
