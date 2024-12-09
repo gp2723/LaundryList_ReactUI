@@ -1,5 +1,6 @@
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { login } from '../services/api.js';
 
@@ -45,11 +46,12 @@ const Login = ({ setUserToken }) => {
           />
         </Form.Group>
 
-        {error && <p style={{ color: 'red' }}>{error}</p>}
+        {error && <p style={{ color: 'red' }}>There was an error. Please reach out to system administrator!</p>}
 
-        <Button variant="primary" onClick={handleLoginClick}>
+        <Button variant="primary" onClick={handleLoginClick} style={{marginRight: '10px'}}>
           Login
         </Button>
+        <Button as={Link} to="/" variant="outline-secondary">Home</Button>
       </Form>
     </>
   );

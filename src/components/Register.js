@@ -1,5 +1,6 @@
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { register } from '../services/api.js';
 
@@ -69,9 +70,10 @@ const Register = ({ setUserToken }) => {
 
         {error && <p style={{ color: 'red' }}>{error}</p>}
 
-        <Button variant="primary" onClick={handleRegisterClick}>
+        <Button variant="primary" onClick={handleRegisterClick} style={{marginRight: '10px'}}>
           Register
         </Button>
+        <Button as={Link} to="/" variant="outline-secondary">Home</Button>
       </Form>
     </>
   );
