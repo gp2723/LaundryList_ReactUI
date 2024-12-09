@@ -151,8 +151,11 @@ const AssignmentDetails = () => {
         setCourseName(course.name);
       }
   
-      // Retrieve the assignment details for the clicked course
-      setAssignments(assignmentsData);
+      // Retrieve the assignment details for the clicked course after 1 second of delay
+      setTimeout(() => {
+        setAssignments(assignmentsData);
+      }, 1000);
+
     }, [courseId]);
 
     // Function to generate AI response
@@ -252,7 +255,7 @@ const AssignmentDetails = () => {
         
           </>
         ) : (
-          <p>Loading...</p>
+          <Spinner animation="grow" />
         )}
       </div>
     );

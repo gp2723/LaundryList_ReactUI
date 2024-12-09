@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import Spinner from 'react-bootstrap/Spinner';
 
 // Course Table Component
 const CourseTable = () => {
@@ -7,8 +8,15 @@ const CourseTable = () => {
     const [allCourses, setAllCourses] = useState([]);
     const [courses, setCourses] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
+
+        // Simulate loading time 1 seconds
+        setTimeout(() => {
+            setIsLoading(false);
+        }, 1000);
+
         // Dummy data for courses
         const dummyCourses = [
             {
@@ -83,6 +91,11 @@ const CourseTable = () => {
       };
 
     return (
+      <>
+      {
+        isLoading ? (
+          <Spinner animation="grow" />
+        ) : (
         <div>
         <h1>Course Table</h1>
         <div className="search-bar">
@@ -114,6 +127,9 @@ const CourseTable = () => {
             </tbody>
         </table>
         </div>
+        )
+      }
+      </>
     );
 };
 
