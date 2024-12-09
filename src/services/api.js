@@ -15,3 +15,46 @@ export const postGenerateAIResponse = async (userInput, assignmentTitle, descrip
         console.error('Error while fetching data from GenAI API', error);
     }
 }
+
+// Login API
+const BASE_URL = 'http://ec2-54-224-53-11.compute-1.amazonaws.com:8000';
+
+export const login = async (uniId, password) => {
+  try {
+    const response = await fetch(`${BASE_URL}/login`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ uni_id: uniId, password }),
+    });
+
+    console.log('Here');
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.error || 'Registration failed');
+    }
+
+    const data = await response.json();
+
+    if (!data.token) {
+        throw new Error('Token is missing in the response');
+    }
+    
+    // Handle success (the token and expiration are included in the response)
+    console.log('Login successful:', data.message);
+    console.log('Token:', data.token);
+    console.log('Expires:', data.expires);
+
+    return data;
+
+  } catch (error) {
+    if (error instanceof Error) {
+    // console.error('Error during login:', error.message);
+    }
+  }
+};
+
+// Example usage
+// login('gargitest', 'gtest');
