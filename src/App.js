@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import "bootstrap/dist/css/bootstrap.min.css";
 import './App.css';
@@ -13,6 +13,19 @@ const App = () => {
 
   const [userToken, setUserToken] = useState(null);
 
+    // Load token from localStorage when the app initializes
+    useEffect(() => {
+      const token = localStorage.getItem('access_token');
+      if (token) {
+        setUserToken(token);
+      }
+    }, []);
+  
+    const handleLogout = () => {
+      localStorage.removeItem('access_token'); // Clear token from localStorage
+      setUserToken(null); // Clear token from state
+    };
+
   return (
     <Router>
       <div className="app">
@@ -25,7 +38,7 @@ const App = () => {
                 <li><Link to="/">Home</Link></li>
                 <li><Link to="/courses">Courses</Link></li>
                 <li><Link to="/about">About</Link></li>
-                <li><Link to="/" onClick={() => setUserToken(null)}>Logout</Link></li>
+                <li><Link to="/" onClick={handleLogout}>Logout</Link></li>
               </>
               : 
               <></>
