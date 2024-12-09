@@ -29,11 +29,9 @@ export const login = async (uniId, password) => {
       body: JSON.stringify({ uni_id: uniId, password }),
     });
 
-    console.log('Here');
-
     if (!response.ok) {
       const errorData = await response.json();
-      throw new Error(errorData.error || 'Registration failed');
+      throw new Error(errorData.error || 'Login failed');
     }
 
     const data = await response.json();
@@ -52,6 +50,41 @@ export const login = async (uniId, password) => {
   } catch (error) {
     if (error instanceof Error) {
         console.error('Error during login:', error.message);
+    }
+  }
+};
+
+export const register = async (uniId, password, email, name) => {
+  try {
+    const response = await fetch(`${BASE_URL}/register`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ uni_id: uniId, password, email, name }),
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.error || 'Registration failed');
+    }
+
+    const data = await response.json();
+
+    if (!data.token) {
+        throw new Error('Token is missing in the response');
+    }
+    
+    // Handle success (the token and expiration are included in the response)
+    console.log('Registeration successful:', data.message);
+    console.log('Token:', data.token);
+    console.log('Expires:', data.expires);
+
+    return data;
+
+  } catch (error) {
+    if (error instanceof Error) {
+        console.error('Error during register:', error.message);
     }
   }
 };

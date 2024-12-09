@@ -1,17 +1,19 @@
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { useState } from 'react';
-import { login } from '../services/api.js';
+import { register } from '../services/api.js';
 
-const Login = ({ setUserToken }) => {
+const Register = ({ setUserToken }) => {
   const [uniId, setUniId] = useState('');
   const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('');
+  const [name, setName] = useState('');
   const [error, setError] = useState('');
 
-  const handleLoginClick = async () => {
+  const handleRegisterClick = async () => {
     setError(''); // Clear previous errors
     try {
-      const data = await login(uniId, password);
+      const data = await register(uniId, password, email, name);
       localStorage.setItem('access_token', data.token);
       localStorage.setItem('token_expiry', data.expires);
       setUserToken(data.token); 
@@ -23,7 +25,7 @@ const Login = ({ setUserToken }) => {
 
   return (
     <>
-      <h1>Login to access your HWLaundryList!</h1>
+      <h1>Register to access your HWLaundryList!</h1>
       <Form onSubmit={(e) => e.preventDefault()}>
         <Form.Group className="mb-3" controlId="formBasicUNI">
           <Form.Label>UNI</Form.Label>
@@ -45,14 +47,34 @@ const Login = ({ setUserToken }) => {
           />
         </Form.Group>
 
+        <Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form.Label>Email</Form.Label>
+          <Form.Control
+            type="text"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+        </Form.Group>
+
+        <Form.Group className="mb-3" controlId="formBasicName">
+          <Form.Label>Name</Form.Label>
+          <Form.Control
+            type="text"
+            placeholder="Name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+        </Form.Group>
+
         {error && <p style={{ color: 'red' }}>{error}</p>}
 
-        <Button variant="primary" onClick={handleLoginClick}>
-          Login
+        <Button variant="primary" onClick={handleRegisterClick}>
+          Register
         </Button>
       </Form>
     </>
   );
 };
 
-export default Login;
+export default Register;
