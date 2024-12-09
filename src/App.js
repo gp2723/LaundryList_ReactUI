@@ -8,7 +8,7 @@ import CourseTable from './components/Courses';
 import Error from './components/Error';
 import Home from './components/Home';
 import Login from './components/Login';
-
+import Register from './components/Register';
 const App = () => {
 
   const [userToken, setUserToken] = useState(null);
@@ -38,6 +38,7 @@ const App = () => {
           <Routes>
             <Route path="/" element={<Home isUserAuthenticated={userToken} />} />
             <Route path="/login" element={<Login setUserToken={setUserToken} />} />
+            <Route path="/register" element={<Register setUserToken={setUserToken}  />} />
             <Route path="/courses" element={<CourseTable />} />
             <Route path="/about" element={<About />} />
             <Route path="/courses/:courseId/assignments" element={<AssignmentDetails />} />
