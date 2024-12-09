@@ -51,10 +51,7 @@ export const login = async (uniId, password) => {
 
   } catch (error) {
     if (error instanceof Error) {
-    // console.error('Error during login:', error.message);
+        console.error('Error during login:', error.message);
     }
   }
 };
-
-// Example usage
-// login('gargitest', 'gtest');
