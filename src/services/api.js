@@ -88,3 +88,37 @@ export const register = async (uniId, password, email, name) => {
     }
   }
 };
+
+const COURSEWORKS_API_URL = 'http://ec2-54-224-53-11.compute-1.amazonaws.com:8001';
+
+export const getCourses = async () => {
+  const token = localStorage.getItem('access_token');
+  try {
+    const response = await axios.get(`${COURSEWORKS_API_URL}/courses`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return response.data;
+  } 
+  catch (error) {
+    console.error('Error while fetching courses from CourseWorks API:', error);
+    return null;
+  }
+}
+
+export const getAssignments = async (courseId) => {
+  const token = localStorage.getItem('access_token');
+  try {
+    const response = await axios.get(`${COURSEWORKS_API_URL}/courses/${courseId}/assignments`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return response.data;
+  } 
+  catch (error) {
+    console.error('Error while fetching assignments from CourseWorks API:', error);
+    return null;
+  }
+}
